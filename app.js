@@ -1,11 +1,10 @@
 'use strict';
 
-const itemsArr = [rock, paper, scissors];
+const itemsArr = ['rock', 'paper', 'scissors'];
 
 function getComputerChoice() {
-  for (let item of itemsArr) {
-    console.log(item);
-  }
+  const randomNumComputer = Math.floor(Math.random() * 3);
+  return itemsArr[randomNumComputer];
 }
 
 getComputerChoice();
