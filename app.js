@@ -1,6 +1,8 @@
 'use strict';
 
 const itemsArr = ['rock', 'paper', 'scissors'];
+let playerCount = 0;
+let computerCount = 0;
 
 function getComputerChoice() {
   const randomNumComputer = Math.floor(Math.random() * 3);
@@ -10,20 +12,34 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === 'rock' && computerSelection === 'paper') {
-    return 'You lose! Paper beats Rock.';
+    computerCount++;
   } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-    return 'You win! Rock beats Scissors.';
+    playerCount++;
   } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-    return 'You win! Paper beats Rock.';
+    playerCount++;
+  } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+    computerCount++;
   } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-    return 'You lose! Rock beats Scissors.';
+    computerCount++;
+  } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+    playerCount++;
   } else {
-    return 'Nobody wins!';
+    playerCount++;
+    computerCount++;
   }
 }
 
-const playerSelection = 'rock';
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+  for (let i = 0; i < 5; i++) {
+    const playerSelection = prompt('Wähle zwischen ROCK - PAPER - SCISSORS:');
+    playRound(playerSelection, getComputerChoice());
+  }
 
-// console.log(getComputerChoice());
+  if (playerCount > computerCount) {
+    alert('Player wins!');
+  } else {
+    alert('Computer wins!');
+  }
+}
+
+game();
