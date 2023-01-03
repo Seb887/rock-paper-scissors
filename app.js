@@ -7,7 +7,18 @@ function getComputerChoice() {
   return itemsArr[randomNumComputer];
 }
 
-getComputerChoice();
+function playRound(playerSelection, computerSelection) {
+  if (playerSelection === 'rock' && computerSelection === 'rock') {
+    console.log('Nobody wins!');
+  } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+    console.log('You lose! Paper beats Rock.');
+  } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+    console.log('You lose! Paper beats Rock.');
+  }
+}
 
-// new line
-console.log('Hello');
+const playerSelection = 'rock';
+const computerSelection = getComputerChoice();
+console.log(playRound(playerSelection, computerSelection));
+
+// console.log(getComputerChoice());
