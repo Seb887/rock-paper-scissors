@@ -8,3 +8,6 @@ function getComputerChoice() {
 }
 
 getComputerChoice();
+
+// new line
+console.log('Hello');
