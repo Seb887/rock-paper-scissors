@@ -5,7 +5,7 @@ In unserer Benutzeroberfläche sollte der Spieler in der Lage sein, das Spiel zu
 anstatt seine Antwort in eine Eingabeaufforderung zu tippen.
 
     [x]  Entfernen Sie vorerst die Logik, die genau fünf Runden spielt.
-    []  Erstellen Sie drei Knöpfe, eine für jede Auswahl. Fügen Sie einen Event-Hörer zu den Buttons hinzu, 
+    [x]  Erstellen Sie drei Knöpfe, eine für jede Auswahl. Fügen Sie einen Event-Hörer zu den Buttons hinzu, 
         die Sie anrufen playRoundFunktion mit dem richtigen playerSelectionjedes Mal, wenn ein Button angeklickt wird. 
         (Sie können die console.logs für diesen Schritt)
     []  Fügen Sie ein divzum Anzeigen von Ergebnissen und Ändern all Ihrer console.logs in DOM-Methoden.
@@ -33,44 +33,73 @@ Werfen wir nun einen Blick darauf, wie wir die Veränderungen aus unseren rps-ui
 */
 
 // Player Buttons
+const allPlayerButtons = document.querySelectorAll('.playerBtn');
 const playerRock = document.querySelector('#playerRock');
 const playerPaper = document.querySelector('#playerPaper');
 const playerScissors = document.querySelector('#playerScissors');
 
+/*
 // Computer Buttons
+const allComputerButtons = document.querySelectorAll('.computerBtn');
 const computerRock = document.querySelector('#computerRock');
 const computerPaper = document.querySelector('#computerPaper');
 const computerScissors = document.querySelector('#computerScissors');
+*/
 
-const computerButtons = [computerRock, computerPaper, computerScissors];
+const computerButtons = ['rock', 'paper', 'scissors'];
 
 let playerCount = 0;
 let computerCount = 0;
 
+function getPlayerChoice() {
+  allPlayerButtons.forEach((button) =>
+    button.addEventListener('click', () => {
+      if (button.value === 'playerRock') {
+        console.log('Playerchoice:', button.value);
+        return 'rock';
+      } else if (button.value === 'playerPaper') {
+        console.log('Playerchoice:', button.value);
+        return 'paper';
+      } else if (button.value === 'playerScissors') {
+        console.log('Playerchoice:', button.value);
+        return 'scissors';
+      }
+    })
+  );
+}
+
 function getComputerChoice() {
   const randomNumComputer = Math.floor(Math.random() * 3);
   // console.log('computerSelection: ', itemsArr[randomNumComputer]);
-  return computerButtons[randomNumComputer].checked;
+  return computerButtons[randomNumComputer];
 }
 
-// function playRound(playerSelection, computerSelection) {
-//   if (playerSelection === 'rock' && computerSelection === 'paper') {
-//     computerCount++;
-//   } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-//     playerCount++;
-//   } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-//     playerCount++;
-//   } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-//     computerCount++;
-//   } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-//     computerCount++;
-//   } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-//     playerCount++;
-//   } else {
-//     playerCount++;
-//     computerCount++;
-//   }
-// }
+function playRound(playerSelection, computerSelection) {
+  if (playerSelection === 'rock' && computerSelection === 'paper') {
+    computerCount++;
+  } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+    playerCount++;
+  } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+    playerCount++;
+  } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+    computerCount++;
+  } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+    computerCount++;
+  } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+    playerCount++;
+  } else {
+    playerCount++;
+    computerCount++;
+  }
+
+  if (playerCount > computerCount) {
+    alert('Player wins!');
+  } else {
+    alert('Computer wins!');
+  }
+}
+
+// playRound(getPlayerChoice(), getComputerChoice());
 
 // function game() {
 //   for (let i = 0; i < 5; i++) {
@@ -84,5 +113,3 @@ function getComputerChoice() {
 //     alert('Computer wins!');
 //   }
 // }
-
-game();
